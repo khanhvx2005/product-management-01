@@ -196,4 +196,33 @@ if (uploadImageInput) {
         })
     }
 }
+// Sắp xếp theo tiêu chí khác nhau
+const sortSelect = document.querySelector("[sort-select]");
+const buttonClear = document.querySelector(".btn-clear");
+if (sortSelect) {
+    const url = new URL(window.location.href);
+    sortSelect.addEventListener("change", (e) => {
+
+        const [sortKey, sortValue] = e.target.value.split("-");
+        if (sortKey && sortValue) {
+            url.searchParams.set("sortKey", sortKey);
+            url.searchParams.set("sortValue", sortValue);
+
+        }
+        window.location.href = url.href;
+
+    })
+    buttonClear.addEventListener("click", () => {
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+    })
+    const sortKey = url.searchParams.get("sortKey");
+    const sortValue = url.searchParams.get("sortValue");
+    if (sortKey && sortValue) {
+
+        const stringClass = `${sortKey}-${sortValue}`;
+        const optionSelected = sortSelect.querySelector(`option[value='${stringClass}']`)
+        optionSelected.selected = true;
+    }
+}
 

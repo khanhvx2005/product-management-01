@@ -723,3 +723,68 @@ table th {
 }
 
 /* end chi tiet san pham */
+/* sap xep theo nhieu tieu chi */
+/* --- CSS cho Thanh Sắp Xếp (Sort Controls) --- */
+
+.sort-controls-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    /* Khoảng cách với thanh lọc bên dưới */
+    padding: 15px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+}
+
+.sort-label {
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Khối Dropdown và Nút Clear */
+.sort-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Kiểu dáng cho Dropdown (select) */
+.sort-controls-bar .form-control {
+    padding: 8px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--card-bg);
+    min-width: 180px;
+    font-size: 1rem;
+    height: 40px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.sort-controls-bar .form-control:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Nút Clear */
+.btn-clear {
+    background-color: #dc3545;
+    /* Màu đỏ */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    height: 40px;
+    line-height: 1;
+}
+
+.btn-clear:hover {
+    background-color: #c82333;
+}

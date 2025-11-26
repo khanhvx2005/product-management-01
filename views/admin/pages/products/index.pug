@@ -4,6 +4,17 @@ block main
     +alert_success("5000")
     section.content-section
         h3 Quản Lý Sản Phẩm
+        .sort-controls-bar
+            span.sort-label Sắp xếp:
+            .sort-dropdown
+                select(id = "sort-select" class ="form-control" name = "type" sort-select)
+                    option(value='position-desc') Vị trí giảm dần
+                    option(value='position-asc') Vị trí tăng dần
+                    option(value='price-asc') Giá tăng dần
+                    option(value='price-desc') Giá giảm dần
+                    option(value='title-asc') Tiêu đề A - Z
+                    option(value='title-desc') Tiêu đề Z - A
+            button.btn-clear Clear
         .filter-controls-bar
             form(class="bulk-action-group" action = "/admin/products/change-multi?_method=PATCH" method = "POST" form-change-multi)
                 div(class="dropdown")
