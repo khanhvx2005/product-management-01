@@ -135,9 +135,7 @@ module.exports.createPost = async (req, res) => {
     } else {
         req.body.position = parseInt(req.body.position)
     }
-    if (req.file) {
-        req.body.thumbnail = `/uploads/${req.file.filename}`;
-    }
+
     await Product.create(req.body)
     req.flash("success", "Tạo mới sản phẩm thành công");
     const backURL = req.get("Referer");
