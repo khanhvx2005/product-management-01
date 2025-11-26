@@ -1,0 +1,18 @@
+extends ../../layouts/default.pug
+block main 
+    
+    div(class="section-one")
+        div(class="container")
+            div(class="row")
+                each item , index in records
+                    div(class="col-4")
+                        div(class="box")
+                            div(class="box-image")
+                                img(src = item.thumbnail alt = item.title)
+                            div(class="box-content")
+                                div(class="box-title") #{item.title}
+                                div(class="box-price d-flex justify-content-between")
+                                    div(class="box-price-new") #{item.priceNew}$
+                                    div(class="box-price-old") #{item.price}$
+                                
+                                div(class="box-percent") #{item.discountPercentage}%

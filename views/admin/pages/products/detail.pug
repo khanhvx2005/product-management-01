@@ -1,0 +1,72 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main 
+    +alert_success("5000")
+    +alert_error("5000")
+    
+    // Tệp product_detail.pug
+    
+    section.content-section
+        h3 Chi Tiết Sản Phẩm: #{records.title}
+        
+        // Nút Quay lại và Sửa
+        .product-actions
+            a.btn-back(href="/admin/products")
+                i.fas.fa-arrow-left
+                | Quay lại
+            a.btn-edit-detail(href=`/admin/products/edit/${records.id}`) 
+                i.fas.fa-edit
+                | Chỉnh sửa
+
+        .detail-container
+            // CỘT TRÁI: THÔNG TIN MEDIA
+            .detail-media
+                .image-viewer
+                    // Ảnh Lớn
+                    img#main-product-image(src=records.thumbnail alt=records.title)
+                
+                
+
+            // CỘT PHẢI: THÔNG TIN CHI TIẾT
+            .detail-info
+                .info-card
+                    h4 Thông Tin Chung
+                    
+                    .info-item
+                        span.label Tên Sản Phẩm:
+                        span.value #{records.title}
+                    .info-item
+                        span.label Giá Gốc:
+                        span.value #{records.price}
+                    .info-item
+                        span.label Giảm Giá %:
+                        span.value #{records.discountPercentage}
+                    .info-item
+                        span.label Giá Sau Giảm:
+                        span.value #{Math.ceil(records.price * ((100 - records.discountPercentage) / 100))}
+                    .info-item
+                        span.label Trạng Thái:
+                        if(records.status=="active")
+                            span.value.status-active Hoạt Động
+                        else 
+                            span.value.status-active Dừng Hoạt Động
+                    .info-item
+                        span.label Số Lượng Tồn:
+                        span.value #{records.stock}
+
+                .info-card
+                    h4 Mô Tả
+                    .info-description
+                        p #{records.description}
+
+                .info-card
+                    h4 Quản Lý
+                    .info-item
+                        span.label Vị Trí Sắp Xếp:
+                        span.value #{records.position}
+                    .info-item
+                        span.label Ngày Tạo:
+                        span.value #{records.createdAt}
+                    .info-item
+                        span.label Cập Nhật Gần Nhất:
+                        span.value #{records.updatedAt}
