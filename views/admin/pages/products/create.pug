@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
 block main 
     +alert_success("5000")
     +alert_error("5000")
@@ -18,7 +19,10 @@ block main
                         .form-group
                             label(for="title") Tên Sản Phẩm:
                             input#title(type="text" name="title" required)
-
+                        .form-group 
+                            label(for="products_category_id") Chọn danh mục:
+                            select(class="form-control" name = "products_category_id" id = "products_category_id")
+                                +select-tree(records)
                         
                         .form-group
                             label(for="price") Giá (VNĐ):

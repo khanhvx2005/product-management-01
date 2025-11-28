@@ -1,4 +1,6 @@
 const Product = require('../../models/products.model')
+const ProductsCategory = require('../../models/products-category.model')
+const createTreeHelper = require('../../helpers/createTree.helper')
 module.exports.index = async (req, res) => {
     const find = {
         deleted: false
@@ -127,7 +129,12 @@ module.exports.deleteItem = async (req, res) => {
     }
 }
 module.exports.create = async (req, res) => {
-    res.render("admin/pages/products/create", { title: "Trang thêm mới sản phẩm" })
+    const records = await ProductsCategory.find({
+        deleted: false
+    });
+
+    const newRecords = createTreeHelper.tree(records);
+    res.render("admin/pages/products/create", { title: "Trang thêm mới sản phẩm", records: newRecords })
 }
 module.exports.createPost = async (req, res) => {
 
@@ -143,8 +150,7 @@ module.exports.createPost = async (req, res) => {
 
     await Product.create(req.body)
     req.flash("success", "Tạo mới sản phẩm thành công");
-    const backURL = req.get("Referer");
-    res.redirect(backURL);
+    res.redirect("/admin/products");
 
 
 }
@@ -154,7 +160,13 @@ module.exports.edit = async (req, res) => {
         deleted: false,
         _id: id
     })
-    res.render('admin/pages/products/edit', { title: "Trang chỉnh sửa sản phẩm", records: records })
+    const recordsTree = await ProductsCategory.find({
+        deleted: false,
+
+    })
+
+    const newRecords = createTreeHelper.tree(recordsTree)
+    res.render('admin/pages/products/edit', { title: "Trang chỉnh sửa sản phẩm", records: records, recordsTree: newRecords })
 }
 module.exports.editPatch = async (req, res) => {
     req.body.price = parseInt(req.body.price)
