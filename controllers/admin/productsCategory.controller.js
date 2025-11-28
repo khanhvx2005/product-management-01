@@ -34,3 +34,25 @@ module.exports.createPost = async (req, res) => {
     const backURL = req.get("Referer");
     res.redirect(backURL);
 }
+module.exports.edit = async (req, res) => {
+    const id = req.params.id;
+
+    const data = await ProductsCategory.findOne({
+        deleted: false,
+        _id: id
+    })
+    const records = await ProductsCategory.find({
+        deleted: false,
+
+    })
+
+    const newRecords = createTreeHelper.tree(records)
+    res.render('admin/pages/productsCategory/edit', { title: "Trang chỉnh sửa sản phẩm", data: data, records: newRecords })
+}
+module.exports.editPatch = async (req, res) => {
+
+    req.body.position = parseInt(req.body.position)
+    await ProductsCategory.updateOne({ _id: req.params.id }, req.body)
+    req.flash("success", "Chỉnh sửa thành công !");
+    res.redirect("/admin/products-category")
+}

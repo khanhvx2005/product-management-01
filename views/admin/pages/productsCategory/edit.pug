@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug
+include ../../mixins/select-tree.pug
+block main 
+    
+    section.content-section
+        h3 Chỉnh Sửa Danh Mục
+
+        .form-container
+            form(action=`/admin/products-category/edit/${data.id}?_method=PATCH` method="POST" enctype="multipart/form-data")
+                
+                .form-fields 
+                    
+                    .form-group-card
+                        h4 Thông tin Cơ bản
+                        
+                        
+                        .form-group
+                            label(for="title") Tên Danh Mục:
+                            input#title(type="text" name="title" required value = data.title)
+
+                        
+                        
+                        .form-group 
+                            label(for="parent_id") Danh mục cha:
+                            select(class="form-control" name = "parent_id")
+                                +select-tree(records,1,data.parent_id)
+                        .form-group.full-width
+                            label(for="description") Mô Tả:
+                            textarea#description(name="description" rows="5") #{data.description}
+
+                    
+                    .form-group-card
+                        h4 Media & Vị trí
+
+                        
+                        .form-group
+                            label(for="thumbnail") Ảnh Đại Diện:
+                            input#thumbnail(type="file" name="thumbnail" accept="image/*" upload-image-input)
+                            img(src = data.thumbnail upload-image-priview style = "width:150px;height:auto")
+                        
+                        .form-group
+                            label(for="position") Vị Trí Sắp Xếp:
+                            input#position(type="number" name="position" placeholder = "Tự động tăng" value = data.position)
+
+                        
+                        
+                        .form-group
+                            label(for="status") Trạng Thái:
+                            select#status(name="status" required)
+                                option(value="active" selected = (data.status == "active" ? true : false)) Hoạt động
+                                option(value="inactive" selected = (data.status == "inactive" ? true : false)) Dừng hoạt động
+                
+
+                
+                .form-actions
+                    button.btn-submit(type="submit")
+                        i.fas.fa-save
+                        | Cập nhập
+                    a.btn-cancel(href="/admin/products-category")
+                        i.fas.fa-times
+                        | Hủy Bỏ
