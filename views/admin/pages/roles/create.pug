@@ -1,0 +1,28 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
+block main 
+    +alert_success("5000")
+    +alert_error("5000")
+    
+    section.content-section
+        h3 Thêm Mới Nhóm Quyền
+
+        .form-container
+            form(action="/admin/roles/create" method="POST" )
+                .form-fields 
+                    .form-group-card
+                        h4 Thông tin Cơ bản
+                        .form-group
+                            label(for="title") Tên Nhóm Quyền:
+                            input#title(type="text" name="title" required)
+                        .form-group.full-width
+                            label(for="description") Mô Tả:
+                            textarea#description(name="description" rows="5")
+                .form-actions
+                    button.btn-submit(type="submit")
+                        i.fas.fa-save
+                        | Lưu & Thêm Mới
+                    a.btn-cancel(href="/admin/roles")
+                        i.fas.fa-times
+                        | Hủy Bỏ
