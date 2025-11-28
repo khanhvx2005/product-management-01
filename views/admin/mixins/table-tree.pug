@@ -1,0 +1,30 @@
+mixin table-tree(records , level = 1)
+    - const prefix = Array(level + 1).join("-- ");
+    each item , index in records 
+        tr
+            
+            td #{item.index}
+            td
+                img.product-thumb(
+                alt=item.title 
+                src=item.thumbnail
+                )
+            td #{prefix}#{item.title}
+            
+            
+            td 
+                input(type = "number" value = item.position min = "1" name = "position" style ="width:60px")
+            td.status-in-stock
+                if(item.status == "active")
+                    a(class = "badge badge-success" data-id = item.id data-status = item.status button-status-table href = "javascript:;") Hoạt động
+                else 
+                    a(class = "badge badge-danger" data-id = item.id data-status = item.status button-status-table href = "javascript:;") Dừng hoạt động
+            td.action-buttons
+                a(class="btn-detail" title="Chi tiết" href=`/admin/products-category/details/${item.id}`)
+                i.fas.fa-eye
+                a(class="btn-edit" title="Sửa" href=`/admin/products-category/edit/${item.id}`)
+                i.fas.fa-edit
+                a(class = "btn-delete" title="Xóa" href="javascript:;" button-delete = item.id)
+                i.fas.fa-trash-alt
+        if(item.children && item.children.length > 0)
+                +table-tree(item.children,level + 1)

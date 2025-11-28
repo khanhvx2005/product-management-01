@@ -1,0 +1,64 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
+block main 
+    +alert_success("5000")
+    +alert_error("5000")
+    
+    section.content-section
+        h3 Thêm Mới Danh Mục
+
+        .form-container
+            form(action="/admin/products-category/create" method="POST" enctype="multipart/form-data")
+                
+                .form-fields 
+                    
+                    .form-group-card
+                        h4 Thông tin Cơ bản
+                        
+                        
+                        .form-group
+                            label(for="title") Tên Danh Mục:
+                            input#title(type="text" name="title" required)
+
+                        
+                        
+                        .form-group 
+                            label(for="parent_id") Danh mục cha:
+                            select(class="form-control" name = "parent_id")
+                                +select-tree(records)
+                        .form-group.full-width
+                            label(for="description") Mô Tả:
+                            textarea#description(name="description" rows="5")
+
+                    
+                    .form-group-card
+                        h4 Media & Vị trí
+
+                        
+                        .form-group
+                            label(for="thumbnail") Ảnh Đại Diện:
+                            input#thumbnail(type="file" name="thumbnail" accept="image/*" upload-image-input)
+                            img(src = "" upload-image-priview style = "width:150px;height:auto")
+                        
+                        .form-group
+                            label(for="position") Vị Trí Sắp Xếp:
+                            input#position(type="number" name="position" placeholder = "Tự động tăng")
+
+                        
+                        
+                        .form-group
+                            label(for="status") Trạng Thái:
+                            select#status(name="status" required)
+                                option(value="active") Hoạt động
+                                option(value="inactive") Dừng hoạt động
+                
+
+                
+                .form-actions
+                    button.btn-submit(type="submit")
+                        i.fas.fa-save
+                        | Lưu & Thêm Mới
+                    a.btn-cancel(href="/admin/products-category")
+                        i.fas.fa-times
+                        | Hủy Bỏ

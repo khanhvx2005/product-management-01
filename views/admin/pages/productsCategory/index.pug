@@ -1,0 +1,63 @@
+extends ../../layouts/default.pug
+include ../../mixins/table-tree.pug
+block main 
+    
+    section.content-section
+        h3 Quản Lý Danh Mục Sản Phẩm
+        
+        .filter-controls-bar
+            
+            form(class = "search-box" form-search)
+                input(
+                    placeholder="Nhập từ khóa" 
+                    type="text"
+                    name = "keyword"
+                    value = keyword
+                    )
+                i(class="fas fa-search" type ="submit")
+            
+                        
+                    
+            a(class="btn-primary-add" type = "button" href = "/admin/products-category/create")
+                i.fas.fa-plus
+                | Thêm Danh Mục
+    .product-list-table
+        table(class="table-checkbox")
+            thead
+                tr
+                    th STT
+                    th Ảnh
+                    th Tên Danh Mục
+                    th Vị trí
+                    th Trạng Thái
+                    th(style = "text-align:center") Hành động
+            tbody
+                +table-tree(records)
+    
+    //- nav(aria-label="Page navigation example" class = "pagination")
+    //-     ul.pagination
+    //-         if(pagination.currentPage > 1)
+    //-             li.page-item
+    //-                 a.page-link(aria-label="Previous" href="#" page = pagination.currentPage-1)
+    //-                     span(aria-hidden="true") «
+    //-         - for(let i = 1;i<=pagination.totalPage;i++)
+    //-             li(class=`page-item ${pagination.currentPage == i ? "active" : ""}`)
+    //-                 a.page-link(href="#" page = i) #{i}
+    //-         if(pagination.currentPage < pagination.totalPage)
+    //-             li.page-item
+    //-                 a.page-link(
+    //-                 aria-label="Next" 
+    //-                 href="#"
+    //-                 page = pagination.currentPage+1
+    //-                 )
+    //-                     span(aria-hidden="true") »
+    //- form(action = ""
+    //- path = "/admin/products/change-status"
+    //- method = "POST"
+    //- form-change-status
+    //- )
+    //- form(action = ""
+    //- path = "/admin/products/delete"
+    //- method = "POST"
+    //- form-delete-items
+    //- )

@@ -215,6 +215,7 @@ if (sortSelect) {
     buttonClear.addEventListener("click", () => {
         url.searchParams.delete("sortKey");
         url.searchParams.delete("sortValue");
+        window.location.href = url.href;
     })
     const sortKey = url.searchParams.get("sortKey");
     const sortValue = url.searchParams.get("sortValue");
@@ -225,4 +226,5 @@ if (sortSelect) {
         optionSelected.selected = true;
     }
 }
+
 
